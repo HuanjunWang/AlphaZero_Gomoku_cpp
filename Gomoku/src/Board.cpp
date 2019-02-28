@@ -27,10 +27,11 @@ int Board::location_to_move(Location& location)
 
 void Board::do_move(int move)
 {
+	steps++;
 	states[move] = current_player;
 
 	// TODO Bug here
-	for (auto it = availables.begin(); it != availables.end();) {
+	for (auto it = availables.begin(); it != availables.end();++it) {
 		if (*it == move) {
 			availables.erase(it);
 			break;
@@ -42,8 +43,11 @@ void Board::do_move(int move)
 PLAYER Board::get_winner()
 {
 	// No enough steps to win
-	if ((steps + 1) / board_width < 2)
+	if ((steps + 1) / n_in_row < 2)
 		return PLAYER::NONE;
+
+	if (steps == board_size)
+		return PLAYER::BOTH;
 
 	for (auto it = states.begin(); it != states.end(); ++it) {
 		auto player = it->second;
@@ -82,7 +86,7 @@ PLAYER Board::get_winner()
 				return player;
 		}
 
-		if (h <= board_width - n_in_row && w >= board_width-1) {
+		if (h <= board_width - n_in_row && w >= n_in_row-1) {
 			auto j = 1;
 			for (; j < n_in_row; j++) {
 				if (states[move + j*board_width - j] != player) break;
@@ -98,4 +102,24 @@ PLAYER Board::get_winner()
 PLAYER Board::get_current_player()
 {
 	return current_player;
+}
+
+bool Board::is_valid_move(int move)
+{
+
+	if (move >= board_size || move < 0) {
+		return false;
+	}
+
+	if (states[move] == PLAYER::NONE)
+		return true;
+
+	return false;
+}
+
+bool Board::is_valid_move(int h, int w)
+{
+
+	auto move = location_to_move(Location(h, w));
+	return is_valid_move(move);
 }

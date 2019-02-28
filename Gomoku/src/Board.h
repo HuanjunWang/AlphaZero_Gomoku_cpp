@@ -1,3 +1,5 @@
+#pragma once
+
 #include <assert.h>
 #include <vector>
 #include <unordered_map>
@@ -5,7 +7,8 @@
 typedef enum {
 	NONE,
 	PLAYER1,
-	PLAYER2
+	PLAYER2,
+	BOTH
 } PLAYER;
 
 class Location {
@@ -51,5 +54,14 @@ public:
 	PLAYER get_winner();
 
 	PLAYER get_current_player();
+
+	int get_width() { return board_width; }
+
+	int get_state(int move) { return states.at(move); }
+
+	std::vector<int> * get_availables(){return & availables;}
+
+	bool is_valid_move(int move);
+	bool is_valid_move(int h, int w);
 
 };
