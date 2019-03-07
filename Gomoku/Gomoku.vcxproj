@@ -123,12 +123,14 @@
     <ClCompile Include="src\Board.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\MCTSPlayer.cpp" />
     <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\thread_test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Board.h" />
     <ClInclude Include="src\Game.h" />
+    <ClInclude Include="src\MCTSPlayer.h" />
     <ClInclude Include="src\Player.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

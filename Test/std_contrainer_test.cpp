@@ -66,10 +66,69 @@ void vector_test() {
 	std::cout << '\n';
 }
 
+class BB {
+public:
+	std::vector<int> v;
+
+	void print() {
+		for (auto it = v.begin(); it != v.end(); ++it) {
+			std::cout << *it << " ";
+		}
+		std::cout << std::endl;
+	}
+};
+
+
+void deep_copy_test() {
+	BB* a_p = new BB();
+
+	a_p->v.push_back(1);
+	a_p->v.push_back(2);
+	a_p->v.push_back(3);
+	a_p->print();
+
+	BB b_p = *a_p;
+	b_p.v.push_back(4);
+
+	a_p->print();
+	b_p.print();
+
+}
+
+class Size_test {
+public:
+	std::vector<int> a;
+};
+
+
+void size_test() {
+	Size_test A;
+
+	std::cout << sizeof(A) << std::endl;
+	A.a.push_back(1);
+	A.a.push_back(1);
+
+
+	A.a.push_back(1);
+	A.a.push_back(1);
+	A.a.push_back(1);
+
+	A.a.push_back(1);
+	A.a.push_back(1);
+	A.a.push_back(1);
+
+	A.a.push_back(1);
+	A.a.push_back(1);
+	A.a.push_back(1);
+	std::cout << sizeof(A) << std::endl;
+	
+}
+
 int main()
 {
 	//vector_test();
-	basic_test();
-
+	//basic_test();
+	//deep_copy_test();
+	size_test();
 	getchar();
 }
